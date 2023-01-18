@@ -48,16 +48,14 @@ public class PlayerController : MonoBehaviour
 		}
 
 
-		float jump = Input.GetAxis("Vertical");
-
-		JumpAnimation(jump);
-
-		void JumpAnimation(float vertical)
-		{
-			if (vertical > 0)
+		float jump = Input.GetAxisRaw("Vertical");
+			if (jump > 0)
 			{
-				animator.SetTrigger("Jump");
+				animator.SetBool("Jump", true);
 			}
-		}
+        else
+        {
+			animator.SetBool("Jump", false);
+        }
 	}
 }

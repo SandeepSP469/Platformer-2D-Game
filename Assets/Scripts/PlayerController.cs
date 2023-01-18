@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
 		Debug.Log("Collision: " + collision.gameObject.name);
 	}
 
-	private void Update()
+	public void Update()
 	{
 		float speed = Input.GetAxisRaw("Horizontal");
 		animator.SetFloat("Speed", Mathf.Abs(speed));
@@ -31,17 +31,33 @@ public class PlayerController : MonoBehaviour
 		}
 		transform.localScale = scale;
 
-		bool jump = Input.GetAxisRaw("Vertical");
-		animator.Setbool("Jump", jump);
 
-		if (jump < 0)
+		void Crouch(bool crouch)
 		{
-			jump = true;
+			animator.SetBool("Crouch", crouch);
 		}
-		else if (jump > 0)
 		{
-			jump = false;
+			if (Input.GetKey(KeyCode.LeftControl))
+			{
+				Crouch(true);
+			}
+			else
+			{
+				Crouch(false);
+			}
+		}
+
+
+		float jump = Input.GetAxis("Vertical");
+
+		JumpAnimation(jump);
+
+		void JumpAnimation(float vertical)
+		{
+			if (vertical > 0)
+			{
+				animator.SetTrigger("Jump");
+			}
 		}
 	}
-
 }

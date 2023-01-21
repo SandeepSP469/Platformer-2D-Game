@@ -5,57 +5,67 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
 	public Animator animator;
-	private void Awake()
+	public float speed;
+	private Rigidbody2D rigidbody2d;
+	public float jumpvelocity;
+	public bool isJumping;
+	
+
+    private void Awake()
+    {
+		rigidbody2d = gameObject.GetComponent<Rigidbody2D>();
+    }
+
+
+    private void Update()
 	{
-		Debug.Log("Player controller awake");
+		float horizontal = Input.GetAxisRaw("Horizontal");
+		PlayerAnimation(horizontal);
+		MoveCharacter(horizontal);
+		Jumping();
 	}
 
-	private void OnCollisionEnter2D(Collision2D collision)
+	private void PlayerAnimation(float horizontal)
 	{
-		Debug.Log("Collision: " + collision.gameObject.name);
-	}
-
-	public void Update()
-	{
-		float speed = Input.GetAxisRaw("Horizontal");
-		animator.SetFloat("Speed", Mathf.Abs(speed));
+		animator.SetFloat("Speed", Mathf.Abs(horizontal));
 
 		Vector3 scale = transform.localScale;
-		if (speed < 0)
+		if (horizontal < 0)
 		{
 			scale.x = -1f * Mathf.Abs(scale.x);
 		}
-		else if (speed > 0)
+		else if (horizontal > 0)
 		{
 			scale.x = Mathf.Abs(scale.x);
 		}
 		transform.localScale = scale;
 
-
-		void Crouch(bool crouch)
-		{
-			animator.SetBool("Crouch", crouch);
-		}
-		{
-			if (Input.GetKey(KeyCode.LeftControl))
-			{
-				Crouch(true);
-			}
-			else
-			{
-				Crouch(false);
-			}
-		}
-
-
-		float jump = Input.GetAxisRaw("Vertical");
-			if (jump > 0)
-			{
-				animator.SetBool("Jump", true);
-			}
-        else
-        {
-			animator.SetBool("Jump", false);
-        }
 	}
+
+	private void MoveCharacter(float horizontal)
+	{
+		Vector3 position = transform.position;
+		position.x = position.x + horizontal * speed * Time.deltaTime;
+		transform.position = position;
+
+	}
+
+	private void Jumping()
+    {
+		if (Input.GetKey(KeyCode.Space) && isJumping)
+		{
+			animator.SetTrigger("Jump");
+			isJumping = false;
+			rigidbody2d.AddForce(new Vector2(0f, jumpvelocity), ForceMode2D.Force);
+		}
+	}
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+			isJumping = true;
+        }
+    }
+
 }

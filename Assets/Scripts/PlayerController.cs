@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -23,6 +25,18 @@ public class PlayerController : MonoBehaviour
 		scorecounter.increasescore(10);
     }
 
+    public void KillPlayer()
+    {
+		Debug.Log("Player Died");
+		animator.SetTrigger("Death");
+		ReloadLevel();
+    }
+
+    private void ReloadLevel()
+    {
+		Debug.Log("Reloaded");
+		SceneManager.LoadScene(0);
+    }
 
     private void Update()
 	{

@@ -50,9 +50,7 @@ public class EnemyControl : MonoBehaviour
     IEnumerator Gethurt()
     {
         Physics2D.IgnoreLayerCollision(6, 7);
-        GetComponent<Animator>().SetLayerWeight(1, 1);
         yield return new WaitForSeconds(3);
-        GetComponent<Animator>().SetLayerWeight(1, 0);
         Physics2D.IgnoreLayerCollision(6, 7, false);
     }
 }

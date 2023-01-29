@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
 	private Rigidbody2D rigidbody2d;
 	public float jumpvelocity;
 	public bool isJumping;
+	//public Gameover gameover;
 	
 
     private void Awake()
@@ -28,15 +29,9 @@ public class PlayerController : MonoBehaviour
     public void KillPlayer()
     {
 		Debug.Log("Player Died");
-		animator.SetTrigger("Death");
-		ReloadLevel();
+		//gameover.Playerdies();
     }
 
-    private void ReloadLevel()
-    {
-		Debug.Log("Reloaded");
-		SceneManager.LoadScene(0);
-    }
 
     private void Update()
 	{

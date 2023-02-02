@@ -1039,7 +1039,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60a08c6815e1b3a48b4653a8539eec28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Levelname: Level1
+  Levelname: Lobby
 --- !u!114 &1540115663
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1989,11 +1989,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.y
       value: 1.51
-      objectReference: {fileID: 0}
-    - target: {fileID: 3317486497335065454, guid: caf88cb79fca6874c94dcb586bcb03f1,
-        type: 3}
-      propertyPath: m_Name
-      value: LevelOver
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3317486497335065455, guid: caf88cb79fca6874c94dcb586bcb03f1, type: 3}

@@ -12,6 +12,7 @@ public class Lobby : MonoBehaviour
     private void Awake()
     {
         startbutton.onClick.AddListener(Playgame);
+
     }
 
     private void Playgame()

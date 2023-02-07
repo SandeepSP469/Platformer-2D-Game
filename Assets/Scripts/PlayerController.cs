@@ -13,6 +13,9 @@ public class PlayerController : MonoBehaviour
 	public float jumpvelocity;
 	public bool isJumping;
 	public Gameover gameover;
+
+	[SerializeField] private AudioSource jumpSound;
+	[SerializeField] private AudioSource move;
 	
 
     private void Awake()
@@ -56,7 +59,7 @@ public class PlayerController : MonoBehaviour
 			scale.x = Mathf.Abs(scale.x);
 		}
 		transform.localScale = scale;
-
+		move.Play();
 	}
 
 	private void MoveCharacter(float horizontal)
@@ -64,7 +67,6 @@ public class PlayerController : MonoBehaviour
 		Vector3 position = transform.position;
 		position.x = position.x + horizontal * speed * Time.deltaTime;
 		transform.position = position;
-
 	}
 
 	private void Jumping()
@@ -74,6 +76,7 @@ public class PlayerController : MonoBehaviour
 			animator.SetTrigger("Jump");
 			isJumping = false;
 			rigidbody2d.AddForce(new Vector2(0f, jumpvelocity), ForceMode2D.Force);
+			jumpSound.Play();
 		}
 	}
 

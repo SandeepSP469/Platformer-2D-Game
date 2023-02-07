@@ -7,6 +7,7 @@ public class EnemyControl : MonoBehaviour
     public Transform[] patrolpoints;
     public float movespeed;
     public int patroldestination;
+    [SerializeField] AudioSource enemy;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -23,6 +24,7 @@ public class EnemyControl : MonoBehaviour
                 StartCoroutine(Gethurt());
             }
         }
+        enemy.Play();
     }
 
     private void Update()
@@ -46,6 +48,7 @@ public class EnemyControl : MonoBehaviour
                 patroldestination = 0;
             }
         }
+        enemy.Play();
     }
     IEnumerator Gethurt()
     {

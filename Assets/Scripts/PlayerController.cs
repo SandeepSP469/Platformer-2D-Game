@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
 	public float jumpvelocity;
 	public bool isJumping;
 	public Gameover gameover;
+	public ParticleSystem dust;
 
 	[SerializeField] private AudioSource jumpSound;
 	[SerializeField] private AudioSource move;
@@ -71,6 +72,7 @@ public class PlayerController : MonoBehaviour
 
 	private void Jumping()
     {
+		CreateDust();
 		if (Input.GetKey(KeyCode.Space) && isJumping)
 		{
 			animator.SetTrigger("Jump");
@@ -86,6 +88,11 @@ public class PlayerController : MonoBehaviour
         {
 			isJumping = true;
         }
+    }
+
+	private void CreateDust()
+    {
+		dust.Play();
     }
 
 }
